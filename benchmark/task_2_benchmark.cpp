@@ -8,9 +8,11 @@
 
 auto SetUp = [] ( ) {
     std::vector<std::pair<uint64_t, uint64_t>> vec;
+    std::seed_seq                              seed {1};
     std::mt19937                               rng;  // default constructed, seeded with fixed seed
-    std::generate_n(std::back_inserter(vec), 1'000'000, [&rng] ( ) {
-        return std::make_pair(rng( ), rng( ));
+    std::uniform_int_distribution<uint64_t>    dist(1, 1 << 20);
+    std::generate_n(std::back_inserter(vec), 1'000'000, [&dist, &rng] ( ) {
+        return std::make_pair(dist(rng), dist(rng));
     });
     return vec;
 };
