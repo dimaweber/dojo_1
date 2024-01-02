@@ -1,12 +1,13 @@
 cmake_minimum_required(VERSION 3.27)
 
-project("dojo-1_test" LANGUAGES CXX)
+project("dojo-1_benchmark" LANGUAGES CXX)
 
 add_compile_definitions(BUILD_BENCHMARK)
 
 set(TARGET "dojo-1_benchmark")
 
-set(SOURCES benchmark.cpp)
+set(SOURCES task_1_benchmark.cpp
+        task_2_benchmark.cpp)
 
 add_executable(${TARGET} ${SOURCES})
 

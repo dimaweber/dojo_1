@@ -3,11 +3,13 @@
 //
 
 #include <fmt/format.h>
-#include <chrono>
-#include <fmt/chrono.h>
 #include <spdlog/spdlog.h>
 
-int main(int argc, const char** argv)
+#include <iostream>
+
+#include "task_1.hxx"
+
+int main (int argc, const char** argv)
 {
 #if DEBUG
     spdlog::set_level(spdlog::level::debug);
@@ -15,12 +17,15 @@ int main(int argc, const char** argv)
     spdlog::set_level(spdlog::level::err);
 #endif
 
-    spdlog::info("start");
+    spdlog::info("start task 1");
 
-    const std::string name {argc>1?argv[1]:"World"};
-    fmt::print("Hello, {}! today is {:%Y-%m-%d}\n", name, std::chrono::system_clock::now());
+    fmt::print("Task 1. enter number: ");
+    uint64_t num;
+    std::cin >> num;
+    Plain_C_3 obj;
+    fmt::print("answer is : {}", obj(num));
 
-    spdlog::info("finish");
+    spdlog::info("finish task 1");
 
     return 0;
 }
