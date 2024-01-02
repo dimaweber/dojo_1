@@ -18,9 +18,13 @@ public:
         spdlog::set_level(spdlog::level::info);
         spdlog::set_pattern("[%H:%M:%S %z] [%t] %v");
 
-        std::mt19937 rng;  // default constructed, seeded with fixed seed
-        std::generate_n(std::back_inserter(vec), 1'000'000, [&rng] ( ) {
-            return std::make_pair(rng( ), rng( ));
+        std::seed_seq                           seed {1};
+        std::mt19937                            rng;  // default constructed, seeded with fixed seed
+        std::uniform_int_distribution<uint64_t> dist(1, 1 << 20);
+        constexpr size_t                        datasetSize {1'000'000};
+        vec.reserve(datasetSize);
+        std::generate_n(std::back_inserter(vec), datasetSize, [&dist, &rng] ( ) {
+            return std::make_pair(dist(rng), dist(rng));
         });
     }
 
@@ -28,7 +32,7 @@ public:
     S                                          obj;
 };
 
-using TestedTypes = ::testing::Types<cpp_standard, gcd_1, gcd_bin, gcd_no_rec>;
+using TestedTypes = ::testing::Types<cpp_standard, gcd_1, gcd_bin, gcd_no_rec, gcd_mod, gcd_no_rec>;
 TYPED_TEST_SUITE(GCD_Test, TestedTypes);
 
 TYPED_TEST(GCD_Test, Plain)

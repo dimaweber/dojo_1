@@ -54,21 +54,47 @@ uint64_t gcd_no_rec::calculate(uint64_t m, uint64_t n) const noexcept
         std::swap(m, n);
     uint64_t mult = 1;
     while ( m > 1 && m != n ) {
-        if ( (m & 1) == 0 && (n & 1) == 0 ) {
+        while ( (m & 1) == 0 && (n & 1) == 0 ) {
             mult <<= 1;
             m >>= 1;
             n >>= 1;
-        } else if ( (m & 1) == 0 && (n & 1) == 1 ) {
-            m >>= 1;
-        } else if ( (m & 1) == 1 && (n & 1) == 0 ) {
-            n >>= 1;
-        } else {
-            n -= m;
         }
+        while ( (m & 1) == 0 )
+            m >>= 1;
+        while ( (n & 1) == 0 )
+            n >>= 1;
+
         if ( m > n )
             std::swap(m, n);
+        if ( m <= 1 || m == n )
+            break;
+
+        if ( (m & 1) == 1 && (n & 1) == 1 ) {
+            n -= m;
+            if ( m > n )
+                std::swap(m, n);
+        }
     }
     if ( m == 1 )
         return mult;
     return n * mult;
+}
+
+uint64_t gcd_mod::calculate(uint64_t m, uint64_t n) const noexcept
+{
+    if ( m > n )
+        std::swap(m, n);
+    return m == 0 ? n : calculate(m, n % m);
+}
+
+uint64_t gcd_mod_no_rec::calculate(uint64_t m, uint64_t n) const noexcept
+{
+    if ( m > n )
+        std::swap(m, n);
+    while ( m != 0 ) {
+        unsigned int r = n % m;
+        n              = m;
+        m              = r;
+    }
+    return n;
 }

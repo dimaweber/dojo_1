@@ -7,11 +7,13 @@
 #include "task_2.hxx"
 
 auto SetUp = [] ( ) {
+    constexpr size_t                           datasetSize {10'000'000};
     std::vector<std::pair<uint64_t, uint64_t>> vec;
     std::seed_seq                              seed {1};
     std::mt19937                               rng;  // default constructed, seeded with fixed seed
     std::uniform_int_distribution<uint64_t>    dist(1, 1 << 20);
-    std::generate_n(std::back_inserter(vec), 1'000'000, [&dist, &rng] ( ) {
+    vec.reserve(datasetSize);
+    std::generate_n(std::back_inserter(vec), datasetSize, [&dist, &rng] ( ) {
         return std::make_pair(dist(rng), dist(rng));
     });
     return vec;
@@ -32,3 +34,5 @@ BENCHMARK(bm_task_2<cpp_standard>)->ThreadPerCpu( )->Complexity( )->Unit(benchma
 BENCHMARK(bm_task_2<gcd_1>)->ThreadPerCpu( )->Complexity( )->Unit(benchmark::kMillisecond);
 BENCHMARK(bm_task_2<gcd_bin>)->ThreadPerCpu( )->Complexity( )->Unit(benchmark::kMillisecond);
 BENCHMARK(bm_task_2<gcd_no_rec>)->ThreadPerCpu( )->Complexity( )->Unit(benchmark::kMillisecond);
+BENCHMARK(bm_task_2<gcd_mod>)->ThreadPerCpu( )->Complexity( )->Unit(benchmark::kMillisecond);
+BENCHMARK(bm_task_2<gcd_mod_no_rec>)->ThreadPerCpu( )->Complexity( )->Unit(benchmark::kMillisecond);
