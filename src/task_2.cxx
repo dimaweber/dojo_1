@@ -1,5 +1,6 @@
 #include "task_2.hxx"
 
+#include <algorithm>
 #include <numeric>
 
 uint64_t cpp_standard::calculate(uint64_t m, uint64_t n) const noexcept
