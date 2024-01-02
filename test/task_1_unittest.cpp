@@ -22,7 +22,7 @@ public:
         std::seed_seq                           seed {1};
         std::mt19937                            rng {seed};
         std::uniform_int_distribution<uint64_t> dist(1, 1 << 20);
-        std::generate_n(std::back_inserter(vec), 100, [dist, &rng] ( ) {
+        std::generate_n(std::back_inserter(vec), 100, [&dist, &rng] ( ) {
             return dist(rng);
         });
     }
