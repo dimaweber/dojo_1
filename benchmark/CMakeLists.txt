@@ -8,12 +8,9 @@ set(TARGET "dojo-1_benchmark")
 
 set(SOURCES benchmark.cpp)
 
-include_directories(../include
-)
-
 add_executable(${TARGET} ${SOURCES})
 
-set(LIBS benchmark::benchmark_main )
+set(LIBS benchmark::benchmark_main dojo_1_lib)
 
 target_link_libraries(${TARGET} ${LIBS})
 
