@@ -8,6 +8,8 @@
 #include <iostream>
 
 #include "task_1.hxx"
+#include "task_2.hxx"
+#include "task_3.hxx"
 
 int main (int argc, const char** argv)
 {
@@ -17,15 +19,32 @@ int main (int argc, const char** argv)
     spdlog::set_level(spdlog::level::err);
 #endif
 
-    spdlog::info("start task 1");
+    {
+        spdlog::info("start task 1");
 
-    fmt::print("Task 1. enter number: ");
-    uint64_t num;
-    std::cin >> num;
-    Plain_C_3 obj;
-    fmt::print("answer is : {}", obj(num));
+        fmt::print("Task 1. enter number: ");
+        uint64_t num;
+        std::cin >> num;
+        task_1::Plain_C_3 obj;
+        fmt::print("answer is : {}\n", obj(num));
 
-    spdlog::info("finish task 1");
+        spdlog::info("finish task 1");
+    }
 
+    {
+        fmt::print("Task 2. enter 2 numbers: ");
+        uint64_t m, n;
+        std::cin >> m >> n;
+        task_2::gcd_no_rec obj;
+        fmt::print("gcd for {} and {} is {}\n", m, n, obj(m, n));
+    }
+
+    {
+        fmt::print("Task 3. enter 2 numbers: ");
+        uint64_t m, n;
+        std::cin >> m >> n;
+        task_3::lcm_using_gcd obj;
+        fmt::print("lcm for {} and {} is {}\n", m, n, obj(m, n));
+    }
     return 0;
 }

@@ -3,7 +3,9 @@
 #include <algorithm>
 #include <numeric>
 
-uint64_t cpp_standard::calculate(uint64_t m, uint64_t n) const noexcept
+namespace task_2
+{
+uint64_t cpp_standard_gcd::calculate(uint64_t m, uint64_t n) const noexcept
 {
     return std::gcd(m, n);
 }
@@ -76,7 +78,7 @@ uint64_t gcd_no_rec::calculate(uint64_t m, uint64_t n) const noexcept
         }
     }
     if ( m == 1 )
-        return mult;
+        return 1 << mult;
     return n << mult;
 }
 
@@ -132,3 +134,4 @@ uint64_t gcd_opt::calculate(uint64_t m, uint64_t n) const noexcept
             return n;
     } while ( true );
 }
+}  // namespace task_2

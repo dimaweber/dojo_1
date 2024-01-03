@@ -4,8 +4,10 @@ project("dojo-1_test" LANGUAGES CXX)
 
 set(TARGET "dojo-1_test")
 
-set(SOURCES task_1_unittest.cpp
-        task_2_unittest.cpp)
+set(SOURCES task_1_unittest.cxx
+        task_2_unittest.cxx
+        task_3_unittest.cxx
+)
 
 #include_directories(SYSTEM ${GTEST_INCLUDE_DIRS})
 

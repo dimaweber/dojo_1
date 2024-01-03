@@ -5,7 +5,7 @@
 #include <cstdint>
 #include <thread>
 
-uint64_t Plain_C_1::calculate(uint64_t n)
+uint64_t task_1::Plain_C_1::calculate(uint64_t n)
 {
     uint64_t accum {0};
     for ( uint64_t i = 1; i <= n; i++ )
@@ -16,7 +16,7 @@ uint64_t Plain_C_1::calculate(uint64_t n)
     return accum;
 }
 
-uint64_t Plain_C_2::calculate(uint64_t n)
+uint64_t task_1::Plain_C_2::calculate(uint64_t n)
 {
     uint64_t accum {0};
     for ( uint64_t i = 1; i <= n; i++ )
@@ -25,7 +25,7 @@ uint64_t Plain_C_2::calculate(uint64_t n)
     return accum;
 }
 
-uint64_t Plain_C_3::calculate(uint64_t n)
+uint64_t task_1::Plain_C_3::calculate(uint64_t n)
 {
     uint64_t accum {0};
     for ( uint64_t i = 0; i <= n; i += 3 )
@@ -37,7 +37,7 @@ uint64_t Plain_C_3::calculate(uint64_t n)
     return accum;
 }
 
-uint64_t Thread_C_1::calculate(uint64_t n)
+uint64_t task_1::Thread_C_1::calculate(uint64_t n)
 {
     auto calc = [n] (uint64_t& out, uint64_t step) {
         out = 0;
@@ -60,7 +60,7 @@ uint64_t Thread_C_1::calculate(uint64_t n)
     return out_3 + out_5 - out_15;
 }
 
-uint64_t Thread_C_2::calculate(uint64_t n)
+uint64_t task_1::Thread_C_2::calculate(uint64_t n)
 {
     auto calc = [] (uint64_t& out, uint64_t l, uint64_t h, uint64_t step) {
         out = 0;
@@ -71,7 +71,7 @@ uint64_t Thread_C_2::calculate(uint64_t n)
 
         spdlog::debug("result is {}", out);
     };
-    
+
     uint64_t out_3_l, out_3_h;
     uint64_t out_5_l, out_5_h;
     uint64_t out_15_l, out_15_h;

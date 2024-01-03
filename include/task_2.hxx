@@ -6,6 +6,8 @@
 #include <cstdint>
 #include <utility>
 
+namespace task_2
+{
 class gcd
 {
 public:
@@ -17,7 +19,7 @@ protected:
     virtual uint64_t calculate(uint64_t m, uint64_t n) const noexcept = 0;
 };
 
-class cpp_standard : public gcd
+class cpp_standard_gcd : public gcd
 {
 protected:
     uint64_t calculate(uint64_t m, uint64_t n) const noexcept override;
@@ -70,3 +72,4 @@ class gcd_opt : public gcd
 protected:
     uint64_t calculate(uint64_t m, uint64_t n) const noexcept override;
 };
+}  // namespace task_2

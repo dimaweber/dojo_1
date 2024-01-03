@@ -9,7 +9,7 @@
 
 #include <random>
 
-template<std::derived_from<gcd> S>
+template<std::derived_from<task_2::gcd> S>
 class GCD_Test : public testing::Test
 {
 public:
@@ -19,7 +19,7 @@ public:
         spdlog::set_pattern("[%H:%M:%S %z] [%t] %v");
 
         std::seed_seq                           seed {1};
-        std::mt19937                            rng;  // default constructed, seeded with fixed seed
+        std::mt19937                            rng {seed};  // default constructed, seeded with fixed seed
         std::uniform_int_distribution<uint64_t> dist(1, 1 << 20);
         constexpr size_t                        datasetSize {1'000'000};
         vec.reserve(datasetSize);
@@ -32,7 +32,8 @@ public:
     S                                          obj;
 };
 
-using TestedTypes = ::testing::Types<cpp_standard, gcd_1, gcd_bin, gcd_no_rec, gcd_mod, gcd_no_rec, gcd_knuth, gcd_schmidt, gcd_stepanov, gcd_opt>;
+using TestedTypes = ::testing::Types<task_2::cpp_standard_gcd, task_2::gcd_1, task_2::gcd_bin, task_2::gcd_no_rec, task_2::gcd_mod, task_2::gcd_no_rec, task_2::gcd_knuth, task_2::gcd_schmidt,
+    task_2::gcd_stepanov, task_2::gcd_opt>;
 TYPED_TEST_SUITE(GCD_Test, TestedTypes);
 
 TYPED_TEST(GCD_Test, Plain)
@@ -50,8 +51,8 @@ TYPED_TEST(GCD_Test, Plain)
 
 TYPED_TEST(GCD_Test, CompareToStandard)
 {
-    cpp_standard ref;
-    TypeParam&   obj = this->obj;
+    task_2::cpp_standard_gcd ref;
+    TypeParam&               obj = this->obj;
 
     for ( const auto& n: this->vec )
         EXPECT_EQ(ref(n), obj(n));

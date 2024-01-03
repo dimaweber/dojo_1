@@ -5,6 +5,8 @@
 #pragma once
 #include <cstdint>
 
+namespace task_1
+{
 class Sum_3_5
 {
 public:
@@ -62,3 +64,4 @@ public:
 protected:
     uint64_t calculate(uint64_t n) override;
 };
+}  // namespace task_1

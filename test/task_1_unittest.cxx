@@ -10,7 +10,7 @@
 #include <algorithm>
 #include <random>
 
-template<std::derived_from<Sum_3_5> S>
+template<std::derived_from<task_1::Sum_3_5> S>
 class Sum35_Test : public testing::Test
 {
 public:
@@ -31,7 +31,7 @@ public:
     S                     obj;
 };
 
-using TestedTypes = ::testing::Types<Plain_C_1, Plain_C_2, Plain_C_3, Thread_C_1, Thread_C_2>;
+using TestedTypes = ::testing::Types<task_1::Plain_C_1, task_1::Plain_C_2, task_1::Plain_C_3, task_1::Thread_C_1, task_1::Thread_C_2>;
 TYPED_TEST_SUITE(Sum35_Test, TestedTypes);
 
 TYPED_TEST(Sum35_Test, Plain)
@@ -65,8 +65,8 @@ TYPED_TEST(Sum35_Test, Plain)
 
 TYPED_TEST(Sum35_Test, Compare)
 {
-    Plain_C_1  ref;
-    TypeParam& obj = this->obj;
+    task_1::Plain_C_1 ref;
+    TypeParam&        obj = this->obj;
 
     for ( uint64_t n: this->vec )
         EXPECT_EQ(ref(n), obj(n));
