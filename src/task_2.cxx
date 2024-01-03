@@ -52,10 +52,10 @@ uint64_t gcd_no_rec::calculate(uint64_t m, uint64_t n) const noexcept
 {
     if ( m > n )
         std::swap(m, n);
-    uint64_t mult = 1;
+    uint64_t mult = 0;
     while ( m > 1 && m != n ) {
         while ( (m & 1) == 0 && (n & 1) == 0 ) {
-            mult <<= 1;
+            mult++;
             m >>= 1;
             n >>= 1;
         }
@@ -77,7 +77,7 @@ uint64_t gcd_no_rec::calculate(uint64_t m, uint64_t n) const noexcept
     }
     if ( m == 1 )
         return mult;
-    return n * mult;
+    return n << mult;
 }
 
 uint64_t gcd_mod::calculate(uint64_t m, uint64_t n) const noexcept
@@ -87,14 +87,48 @@ uint64_t gcd_mod::calculate(uint64_t m, uint64_t n) const noexcept
     return m == 0 ? n : calculate(m, n % m);
 }
 
-uint64_t gcd_mod_no_rec::calculate(uint64_t m, uint64_t n) const noexcept
+uint64_t gcd_knuth::calculate(uint64_t m, uint64_t n) const noexcept
+{
+    uint64_t t;
+    //    if ( m > n )
+    //        std::swap(m, n);
+    while ( m > 0 ) {
+        t = m;
+        m = n % m;
+        n = t;
+    }
+    return n;
+}
+
+uint64_t gcd_schmidt::calculate(uint64_t m, uint64_t n) const noexcept
+{
+    while ( m > 0 && n > 0 )
+        m > n ? m %= n : n %= m;
+    return m + n;
+}
+
+uint64_t gcd_stepanov::calculate(uint64_t m, uint64_t n) const noexcept
+{
+    while ( true ) {
+        if ( n < 1 )
+            return m;
+        m %= n;
+        if ( m < 1 )
+            return n;
+        n %= m;
+    }
+}
+
+uint64_t gcd_opt::calculate(uint64_t m, uint64_t n) const noexcept
 {
     if ( m > n )
         std::swap(m, n);
-    while ( m != 0 ) {
-        unsigned int r = n % m;
-        n              = m;
-        m              = r;
-    }
-    return n;
+    do {
+        n %= m;
+        if ( n < 1 )
+            return m;
+        m %= n;
+        if ( m < 1 )
+            return n;
+    } while ( true );
 }

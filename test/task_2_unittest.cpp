@@ -32,7 +32,7 @@ public:
     S                                          obj;
 };
 
-using TestedTypes = ::testing::Types<cpp_standard, gcd_1, gcd_bin, gcd_no_rec, gcd_mod, gcd_no_rec>;
+using TestedTypes = ::testing::Types<cpp_standard, gcd_1, gcd_bin, gcd_no_rec, gcd_mod, gcd_no_rec, gcd_knuth, gcd_schmidt, gcd_stepanov, gcd_opt>;
 TYPED_TEST_SUITE(GCD_Test, TestedTypes);
 
 TYPED_TEST(GCD_Test, Plain)
