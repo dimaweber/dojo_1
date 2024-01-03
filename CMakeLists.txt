@@ -10,7 +10,7 @@ if (CCACHE_FOUND)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
 endif (CCACHE_FOUND)
 
-option(TIDY_CHECKS "Run clang-tidy for statis analyze" OFF)
+option(TIDY_CHECKS "Run clang-tidy for static analyze" OFF)
 if (TIDY_CHECKS)
     set(CMAKE_CXX_CLANG_TIDY clang-tidy -config-file=${CMAKE_CURRENT_LIST_DIR}/.clang-tidy;
     )
