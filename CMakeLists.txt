@@ -12,7 +12,7 @@ endif (CCACHE_FOUND)
 
 option(TIDY_CHECKS "Run clang-tidy for statis analyze" OFF)
 if (TIDY_CHECKS)
-    set(CMAKE_CXX_CLANG_TIDY clang-tidy -config-file=${CMAKE_CURRENT_LIST_DIR}/clang-tidy;
+    set(CMAKE_CXX_CLANG_TIDY clang-tidy -config-file=${CMAKE_CURRENT_LIST_DIR}/.clang-tidy;
     )
 endif ()
 
