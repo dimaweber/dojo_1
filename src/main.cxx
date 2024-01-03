@@ -11,7 +11,7 @@
 #include "task_2.hxx"
 #include "task_3.hxx"
 
-int main (int argc, const char** argv)
+int main (int /*argc*/, const char** /*argv*/)
 {
 #if DEBUG
     spdlog::set_level(spdlog::level::debug);

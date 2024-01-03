@@ -11,6 +11,8 @@ namespace task_2
 class gcd
 {
 public:
+    virtual ~gcd( ) = default;
+
     uint64_t operator( ) (uint64_t a, uint64_t b) const noexcept { return calculate(a, b); }
 
     uint64_t operator( ) (std::pair<uint64_t, uint64_t> p) const noexcept { return calculate(p.first, p.second); }

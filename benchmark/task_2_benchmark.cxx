@@ -26,9 +26,9 @@ void bm_task_2 (benchmark::State& state)
 {
     Q obj;
     for ( auto _: state )
-        for ( auto p: gcd_vec ) {
-            benchmark::DoNotOptimize(obj(p.first, p.second));
-            benchmark::DoNotOptimize(obj(p.second, p.first));
+        for ( auto [m, n]: gcd_vec ) {
+            benchmark::DoNotOptimize(obj(m, n));
+            benchmark::DoNotOptimize(obj(n, m));
         }
 }
 

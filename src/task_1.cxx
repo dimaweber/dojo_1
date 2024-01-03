@@ -2,7 +2,6 @@
 
 #include <spdlog/spdlog.h>
 
-#include <cstdint>
 #include <thread>
 
 uint64_t task_1::Plain_C_1::calculate(uint64_t n)

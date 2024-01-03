@@ -2,6 +2,19 @@ cmake_minimum_required(VERSION 3.27)
 project(dojo_1)
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+find_program(CCACHE_FOUND ccache)
+if (CCACHE_FOUND)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
+endif (CCACHE_FOUND)
+
+option(TIDY_CHECKS "Run clang-tidy for statis analyze" OFF)
+if (TIDY_CHECKS)
+    set(CMAKE_CXX_CLANG_TIDY clang-tidy -config-file=${CMAKE_CURRENT_LIST_DIR}/clang-tidy;
+    )
+endif ()
 
 add_subdirectory(external/fmt)
 #find_package(fmt)
@@ -12,20 +25,20 @@ add_subdirectory(external/spdlog)
 
 include_directories(include)
 
-option(BUILD_TESTS "Build unittests" OFF)
-if (BUILD_TESTS)
-    add_compile_definitions(BUILD_TESTS)
-    add_subdirectory(external/googletest)
-    enable_testing()
-    add_subdirectory(test)
-endif ()
-
 option(BUILD_BENCHMARK "Build benchmark" OFF)
 if (BUILD_BENCHMARK)
     add_compile_definitions(BUILD_BENCHMARK)
     set(BENCHMARK_ENABLE_GTEST_TESTS OFF)
     add_subdirectory(external/benchmark)
     add_subdirectory(benchmark)
+endif ()
+
+option(BUILD_TESTS "Build unittests" OFF)
+if (BUILD_TESTS)
+    add_compile_definitions(BUILD_TESTS)
+    add_subdirectory(external/googletest)
+    enable_testing()
+    add_subdirectory(test)
 endif ()
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
