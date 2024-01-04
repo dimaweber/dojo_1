@@ -32,8 +32,8 @@ public:
     S                                          obj;
 };
 
-using TestedTypes = ::testing::Types<task_2::cpp_standard_gcd, task_2::gcd_1, task_2::gcd_bin, task_2::gcd_no_rec, task_2::gcd_mod, task_2::gcd_no_rec, task_2::gcd_knuth, task_2::gcd_schmidt,
-    task_2::gcd_stepanov, task_2::gcd_opt>;
+using TestedTypes = ::testing::Types<task_2::cpp_standard_gcd, task_2::gcd_1, task_2::gcd_bin, task_2::gcd_no_rec, task_2::gcd_no_rec_opt, task_2::gcd_mod, task_2::gcd_no_rec, task_2::gcd_knuth,
+    task_2::gcd_schmidt, task_2::gcd_stepanov, task_2::gcd_opt>;
 TYPED_TEST_SUITE(GCD_Test, TestedTypes);
 
 TYPED_TEST(GCD_Test, Plain)

@@ -7,6 +7,7 @@ set(TARGET "dojo-1_test")
 set(SOURCES task_1_unittest.cxx
         task_2_unittest.cxx
         task_3_unittest.cxx
+        task_4_unittest.cpp
 )
 
 #include_directories(SYSTEM ${GTEST_INCLUDE_DIRS})

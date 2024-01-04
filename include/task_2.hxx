@@ -45,6 +45,12 @@ protected:
     uint64_t calculate(uint64_t m, uint64_t n) const noexcept override;
 };
 
+class gcd_no_rec_opt : public gcd
+{
+protected:
+    uint64_t calculate(uint64_t m, uint64_t n) const noexcept override;
+};
+
 class gcd_mod : public gcd
 {
 protected:

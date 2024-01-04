@@ -42,19 +42,20 @@ void bm_task_2_special (benchmark::State& state)
     }
 }
 
-BENCHMARK(bm_task_2<task_2::cpp_standard_gcd>)->ThreadPerCpu( )->Complexity( )->Unit(benchmark::kMillisecond);
-BENCHMARK(bm_task_2<task_2::gcd_1>)->ThreadPerCpu( )->Complexity( )->Unit(benchmark::kMillisecond);
-BENCHMARK(bm_task_2<task_2::gcd_bin>)->ThreadPerCpu( )->Complexity( )->Unit(benchmark::kMillisecond);
-BENCHMARK(bm_task_2<task_2::gcd_no_rec>)->ThreadPerCpu( )->Complexity( )->Unit(benchmark::kMillisecond);
-BENCHMARK(bm_task_2<task_2::gcd_mod>)->ThreadPerCpu( )->Complexity( )->Unit(benchmark::kMillisecond);
-BENCHMARK(bm_task_2<task_2::gcd_knuth>)->ThreadPerCpu( )->Complexity( )->Unit(benchmark::kMillisecond);
-BENCHMARK(bm_task_2<task_2::gcd_schmidt>)->ThreadPerCpu( )->Complexity( )->Unit(benchmark::kMillisecond);
-BENCHMARK(bm_task_2<task_2::gcd_stepanov>)->ThreadPerCpu( )->Complexity( )->Unit(benchmark::kMillisecond);
-BENCHMARK(bm_task_2<task_2::gcd_opt>)->ThreadPerCpu( )->Complexity( )->Unit(benchmark::kMillisecond);
+BENCHMARK(bm_task_2<task_2::cpp_standard_gcd>)->ThreadPerCpu( )->Unit(benchmark::kMillisecond);
+BENCHMARK(bm_task_2<task_2::gcd_1>)->ThreadPerCpu( )->Unit(benchmark::kMillisecond);
+BENCHMARK(bm_task_2<task_2::gcd_bin>)->ThreadPerCpu( )->Unit(benchmark::kMillisecond);
+BENCHMARK(bm_task_2<task_2::gcd_no_rec>)->ThreadPerCpu( )->Unit(benchmark::kMillisecond);
+BENCHMARK(bm_task_2<task_2::gcd_no_rec_opt>)->ThreadPerCpu( )->Unit(benchmark::kMillisecond);
+BENCHMARK(bm_task_2<task_2::gcd_mod>)->ThreadPerCpu( )->Unit(benchmark::kMillisecond);
+BENCHMARK(bm_task_2<task_2::gcd_knuth>)->ThreadPerCpu( )->Unit(benchmark::kMillisecond);
+BENCHMARK(bm_task_2<task_2::gcd_schmidt>)->ThreadPerCpu( )->Unit(benchmark::kMillisecond);
+BENCHMARK(bm_task_2<task_2::gcd_stepanov>)->ThreadPerCpu( )->Unit(benchmark::kMillisecond);
+BENCHMARK(bm_task_2<task_2::gcd_opt>)->ThreadPerCpu( )->Unit(benchmark::kMillisecond);
 
-BENCHMARK(bm_task_2_special<task_2::cpp_standard_gcd>)->ThreadPerCpu( )->Unit(benchmark::kNanosecond)->Repetitions(100);
-BENCHMARK(bm_task_2_special<task_2::gcd_no_rec>)->ThreadPerCpu( )->Unit(benchmark::kNanosecond)->Repetitions(100);
-BENCHMARK(bm_task_2_special<task_2::gcd_knuth>)->ThreadPerCpu( )->Unit(benchmark::kNanosecond)->Repetitions(100);
-BENCHMARK(bm_task_2_special<task_2::gcd_schmidt>)->ThreadPerCpu( )->Unit(benchmark::kNanosecond)->Repetitions(100);
-BENCHMARK(bm_task_2_special<task_2::gcd_stepanov>)->ThreadPerCpu( )->Unit(benchmark::kNanosecond)->Repetitions(100);
-BENCHMARK(bm_task_2_special<task_2::gcd_opt>)->ThreadPerCpu( )->Unit(benchmark::kNanosecond)->Repetitions(100);
+BENCHMARK(bm_task_2_special<task_2::cpp_standard_gcd>)->ThreadPerCpu( )->Unit(benchmark::kNanosecond);
+BENCHMARK(bm_task_2_special<task_2::gcd_no_rec>)->ThreadPerCpu( )->Unit(benchmark::kNanosecond);
+BENCHMARK(bm_task_2_special<task_2::gcd_no_rec_opt>)->ThreadPerCpu( )->Unit(benchmark::kNanosecond);
+BENCHMARK(bm_task_2_special<task_2::gcd_knuth>)->ThreadPerCpu( )->Unit(benchmark::kNanosecond);
+BENCHMARK(bm_task_2_special<task_2::gcd_schmidt>)->ThreadPerCpu( )->Unit(benchmark::kNanosecond);
+BENCHMARK(bm_task_2_special<task_2::gcd_stepanov>)->ThreadPerCpu( )->Unit(benchmark::kNanosecond);

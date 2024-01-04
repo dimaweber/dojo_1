@@ -9,6 +9,8 @@ set(TARGET "dojo-1_benchmark")
 set(SOURCES task_1_benchmark.cxx
         task_2_benchmark.cxx
         task_3_benchmark.cxx
+        ../include/task_4.hxx
+        task_4_benchmark.cxx
 )
 
 add_executable(${TARGET} ${SOURCES})

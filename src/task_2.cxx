@@ -123,6 +123,10 @@ uint64_t gcd_stepanov::calculate(uint64_t m, uint64_t n) const noexcept
 
 uint64_t gcd_opt::calculate(uint64_t m, uint64_t n) const noexcept
 {
+    if ( m == 0 )
+        return n;
+    if ( n == 0 )
+        return m;
     if ( m > n )
         std::swap(m, n);
     do {
@@ -133,5 +137,26 @@ uint64_t gcd_opt::calculate(uint64_t m, uint64_t n) const noexcept
         if ( m < 1 )
             return n;
     } while ( true );
+}
+
+uint64_t gcd_no_rec_opt::calculate(uint64_t m, uint64_t n) const noexcept
+{
+    int      m_zeros = std::countr_zero(m);
+    int      n_zeros = std::countr_zero(n);
+    uint64_t mult    = std::min(m_zeros, n_zeros);
+    m >>= m_zeros;
+    n >>= n_zeros;
+
+    if ( m > n )
+        std::swap(m, n);
+    while ( m > 1 && m != n ) {
+        n -= m;
+        n >>= std::countr_zero(n);
+        if ( m > n )
+            std::swap(m, n);
+    }
+    if ( m == 1 )
+        return 1 << mult;
+    return n << mult;
 }
 }  // namespace task_2

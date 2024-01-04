@@ -8,6 +8,7 @@ set(SOURCES main.cxx)
 set(SOURCES_LIB task_1.cxx
         task_2.cxx
         task_3.cxx
+        task_4.cxx
 )
 
 add_library(${TARGET_LIB} STATIC ${SOURCES_LIB})
