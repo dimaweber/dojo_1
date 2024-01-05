@@ -10,6 +10,7 @@
 #include "task_1.hxx"
 #include "task_2.hxx"
 #include "task_3.hxx"
+#include "task_4.hxx"
 
 int main (int /*argc*/, const char** /*argv*/)
 {
@@ -45,6 +46,14 @@ int main (int /*argc*/, const char** /*argv*/)
         std::cin >> m >> n;
         task_3::lcm_using_gcd obj;
         fmt::print("lcm for {} and {} is {}\n", m, n, obj(m, n));
+    }
+
+    {
+        fmt::print("Task 4. enter the number: ");
+        uint64_t num;
+        std::cin >> num;
+        task_4::l_prime_cached obj;
+        fmt::print("greatest prime_cached before {} is {}\n", num, obj(num));
     }
     return 0;
 }

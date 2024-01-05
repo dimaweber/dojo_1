@@ -7,7 +7,7 @@
 #include "task_2.hxx"
 
 auto gcd_SetUp = [] ( ) {
-    constexpr size_t                           datasetSize {10'000'000};
+    constexpr size_t                           datasetSize {100'000'000};
     std::vector<std::pair<uint64_t, uint64_t>> vec;
     std::seed_seq                              seed {1};
     std::mt19937                               rng {seed};  // default constructed, seeded with fixed seed
