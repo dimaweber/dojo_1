@@ -22,10 +22,9 @@ std::vector<std::pair<uint64_t, uint64_t>> sexy_prime_ref::calculate(uint64_t nu
 
 std::vector<std::pair<uint64_t, uint64_t>> sexy_prime_impl::calculate(uint64_t num) const noexcept
 {
-    task_4::prime_cached_single_thread         prime;
     std::vector<std::pair<uint64_t, uint64_t>> ans;
     for ( uint64_t i = 3; i <= num; i += 2 )
-        if ( prime.is_prime(i) && prime.is_prime(i + 6) )
+        if ( primer( ).is_prime(i) && primer( ).is_prime(i + 6) )
             ans.emplace_back(std::pair<uint64_t, uint64_t> {i, i + 6});
     return ans;
 }

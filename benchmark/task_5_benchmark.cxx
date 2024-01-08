@@ -36,3 +36,4 @@ void bm_task_5_get_sexy_prime (benchmark::State& state)
 
 BENCHMARK(bm_task_5_get_sexy_prime<task_5::sexy_prime_ref>)->RangeMultiplier(10)->Range(10, std::size(sexy_prime_vec))->Complexity( )->Unit(benchmark::kMillisecond);
 BENCHMARK(bm_task_5_get_sexy_prime<task_5::sexy_prime_impl>)->RangeMultiplier(10)->Range(10, std::size(sexy_prime_vec))->Complexity( )->Unit(benchmark::kMillisecond);
+BENCHMARK(bm_task_5_get_sexy_prime<task_5::sexy_prime_impl_mt>)->RangeMultiplier(10)->Range(10, std::size(sexy_prime_vec))->Complexity( )->Unit(benchmark::kMillisecond);
