@@ -6,7 +6,9 @@
 
 #include <algorithm>
 #include <cstdint>
+#include <mutex>
 #include <set>
+#include <vector>
 
 namespace task_4
 {
@@ -21,14 +23,76 @@ public:
 
 class prime_cached : public prime
 {
-    mutable std::set<uint64_t> primeDividers {predefinedPrimes};
-    mutable uint64_t           maxCachedPrime = std::ranges::max(primeDividers);
+protected:
+    virtual const std::set<uint64_t>& getCachedPrimes( ) const = 0;
 
-    void populateCache(uint64_t num) const;
-    bool is_divided_by_cachedPrime(uint64_t num) const;
+    virtual uint64_t maxCachedPrime ( ) const { return std::ranges::max(getCachedPrimes( )); }
+
+    virtual void onOutOfCachedRange(uint64_t num) const    = 0;
+    virtual void onNonCachedPrimeFound(uint64_t num) const = 0;
+    virtual bool is_divided_by_cachedPrime(uint64_t num) const;
+    virtual bool is_in_cache(uint64_t num) const;
 
 public:
     bool is_prime(uint64_t) const noexcept override;
+};
+
+class prime_cached_single_thread : public prime_cached
+{
+    mutable std::set<uint64_t> primeDividers {predefinedPrimes};
+
+    void populateCache(uint64_t num) const;
+
+protected:
+    void onOutOfCachedRange (uint64_t num) const override { populateCache(num); }
+
+    void onNonCachedPrimeFound (uint64_t num) const override { primeDividers.insert(num); }
+
+    const std::set<uint64_t>& getCachedPrimes ( ) const override { return primeDividers; }
+};
+
+class prime_thread_cached : public prime_cached
+{
+public:
+    prime_thread_cached( );
+
+    virtual ~prime_thread_cached( )
+    {
+        finishBuildThread = true;
+        buildThread.join( );
+    }
+
+protected:
+    bool is_in_cache(uint64_t num) const override;
+    bool is_divided_by_cachedPrime(uint64_t num) const override;
+
+    struct segment {
+        enum class State { Empty, Process, Complete };
+        static constexpr size_t emptySegmentWidth = 1000;
+        uint64_t                lower {0};
+        uint64_t                upper {0};
+        std::set<uint64_t>      primes;
+        State                   state {State::Empty};
+
+        segment(uint64_t lo);
+        void merge(prime_thread_cached::segment& other);
+    };
+
+    const std::set<uint64_t>& getCachedPrimes( ) const override;
+    void                      onNonCachedPrimeFound(uint64_t num) const override;
+    void                      onOutOfCachedRange(uint64_t num) const override;
+
+private:
+    segment segmentA;
+
+    mutable std::mutex cachedPrimesAccess;
+    std::thread        buildThread;
+    bool               finishBuildThread {false};
+
+    uint64_t             maxCachedPrime( ) const override;
+    std::vector<segment> segments( );
+    void                 processSegment(segment& seg);
+    void                 build( );
 };
 
 class l_prime
@@ -51,9 +115,20 @@ protected:
 
 class l_prime_cached : public l_prime
 {
-    const prime_cached p;
+    const prime_cached_single_thread p;
 
 protected:
+    virtual const prime_cached& primer ( ) const { return p; }
+
     uint64_t calculate(uint64_t num) const noexcept override;
 };
+
+class l_prime_thread_cached : public l_prime_cached
+{
+    const prime_thread_cached p;
+
+protected:
+    const prime_cached& primer ( ) const { return p; }
+};
+
 }  // namespace task_4

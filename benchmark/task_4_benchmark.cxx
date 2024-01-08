@@ -35,7 +35,8 @@ void bm_task_4_is_prime (benchmark::State& state)
 }
 
 BENCHMARK(bm_task_4_is_prime<task_4::l_prime_ref>)->RangeMultiplier(10)->Range(10, 10'000'000)->Complexity( )->Unit(benchmark::kMillisecond);
-BENCHMARK(bm_task_4_is_prime<task_4::prime_cached>)->RangeMultiplier(10)->Range(10, 10'000'000)->Complexity( )->Unit(benchmark::kMillisecond);
+BENCHMARK(bm_task_4_is_prime<task_4::prime_cached_single_thread>)->RangeMultiplier(10)->Range(10, 10'000'000)->Complexity( )->Unit(benchmark::kMillisecond);
+BENCHMARK(bm_task_4_is_prime<task_4::prime_thread_cached>)->RangeMultiplier(10)->Range(10, 10'000'000)->Complexity( )->Unit(benchmark::kMillisecond);
 
 template<std::derived_from<task_4::l_prime> Q>
 void bm_task_4_get_prev_prime (benchmark::State& state)
@@ -49,3 +50,4 @@ void bm_task_4_get_prev_prime (benchmark::State& state)
 
 BENCHMARK(bm_task_4_get_prev_prime<task_4::l_prime_ref>)->RangeMultiplier(10)->Range(10, 10'000'000)->Complexity( )->Unit(benchmark::kMillisecond);
 BENCHMARK(bm_task_4_get_prev_prime<task_4::l_prime_cached>)->RangeMultiplier(10)->Range(10, 10'000'000)->Complexity( )->Unit(benchmark::kMillisecond);
+BENCHMARK(bm_task_4_get_prev_prime<task_4::l_prime_thread_cached>)->RangeMultiplier(10)->Range(10, 10'000'000)->Complexity( )->Unit(benchmark::kMillisecond);

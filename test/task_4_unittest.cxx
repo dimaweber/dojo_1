@@ -10,9 +10,19 @@
 #include <algorithm>
 #include <random>
 
-TEST(Prime, isprime)
+template<std::derived_from<task_4::prime> P>
+class Prime_Test : public testing::Test
 {
-    task_4::prime_cached p;
+public:
+    P prime;
+};
+
+using Prime_TestedTypes = ::testing::Types<task_4::prime_cached_single_thread, task_4::prime_thread_cached>;
+TYPED_TEST_SUITE(Prime_Test, Prime_TestedTypes);
+
+TYPED_TEST(Prime_Test, PrimevsHardcoded)
+{
+    TypeParam& p = this->prime;
     EXPECT_FALSE(p.is_prime(0));
     EXPECT_FALSE(p.is_prime(1));
     EXPECT_TRUE(p.is_prime(2));
@@ -23,9 +33,9 @@ TEST(Prime, isprime)
     EXPECT_TRUE(p.is_prime(53));
 }
 
-TEST(Prime, is_prime_vs_predefined)
+TYPED_TEST(Prime_Test, PrimeVsPredefined)
 {
-    task_4::prime_cached p;
+    TypeParam& p = this->prime;
     for ( uint64_t n = 0; n <= std::ranges::max(task_4::predefinedPrimes); n++ )
         EXPECT_EQ(p.is_prime(n), std::ranges::find(task_4::predefinedPrimes, n) != task_4::predefinedPrimes.cend( ));
 }
